@@ -5,10 +5,10 @@
 *.pem
 *.p12
 *.pfx
-
-# Lokale Kilo-/Tool-Daten
-.kilo.local/
 secrets/
+
+# Lokale Daten
+.kilo.local/
 
 # Betriebssystem / Editor
 .DS_Store

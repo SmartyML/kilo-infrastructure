@@ -1,11 +1,6 @@
-﻿# kilo-infrastructure
+﻿# Kilo Infrastructure
 
-Zentrale Quelle für die gemeinsame Server- und Kilo-Konfiguration.
+Zentrale Kilo-Code-Infrastruktur für die Serverlandschaft.
 
-Der Inhalt von `root-admin/` wird auf Zielsystemen nach `/root/admin/` ausgerollt.
-
-Workflow:
-
-test -> Prüfung auf kilo-test -> main -> produktive Verteilung
-
-Secrets, Passwörter, Tokens, API-Keys und private Schlüssel werden nicht in Git gespeichert.
+Die fachlichen Regeln, Agents, Skills, Skripte und weitere Kilo-Konfiguration
+werden anschließend schrittweise aus dem bisherigen Bestand migriert.
