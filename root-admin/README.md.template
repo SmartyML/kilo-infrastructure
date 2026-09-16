@@ -1,0 +1,33 @@
+# __HOSTNAME__
+
+## Rolle
+
+Debian-13-LXC auf Proxmox. Die konkrete Anwendungsrolle wird nach der Grundprovisionierung ergänzt.
+
+## System
+
+- Hostname: __HOSTNAME__
+- IPv4: __IP__
+- Gateway: 192.168.31.1
+- DNS: 192.168.31.1
+- Arbeitsverzeichnis: /root/admin
+
+## Administration
+
+- Primärer Zugriff: SSH mit Public Key
+- Root-Passwort-Anmeldung per SSH: deaktiviert
+- Arbeits- und Dokumentationsverzeichnis: `/root/admin`
+
+## Verzeichnisstruktur
+
+```text
+/root/admin/
+├── AGENTS.md
+├── BACKUP.md
+├── CHANGELOG.md
+├── COMMANDS.md
+├── README.md
+├── config/
+├── scripts/
+└── .vscode/
+```
