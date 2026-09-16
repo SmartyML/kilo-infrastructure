@@ -1,0 +1,17 @@
+﻿# Secrets
+.env
+.env.*
+*.key
+*.pem
+*.p12
+*.pfx
+
+# Lokale Kilo-/Tool-Daten
+.kilo.local/
+secrets/
+
+# Betriebssystem / Editor
+.DS_Store
+Thumbs.db
+*.swp
+*~
