@@ -4,6 +4,16 @@
     "/root/admin/AGENTS.md"
   ],
   "model": "deepseek/deepseek-flash",
+  "mcp": {
+    "context7": {
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
+      "headers": {
+        "Authorization": "ctx7sk-67dd4f68-4017-4133-8d23-16d379aaab97"
+      },
+      "enabled": true
+    }
+  },
   "permission": {
     "*": "allow",
 
@@ -16,6 +26,10 @@
     "lsp": "allow",
     "todoread": "allow",
     "todowrite": "allow",
+
+    "context7_*": "ask",
+    "context7_resolve-library-id": "allow",
+    "context7_query-docs": "allow",
 
     "edit": "allow",
     "write": "allow",
