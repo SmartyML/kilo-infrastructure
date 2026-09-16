@@ -15,3 +15,6 @@ secrets/
 Thumbs.db
 *.swp
 *~
+.local
+
+.local/
