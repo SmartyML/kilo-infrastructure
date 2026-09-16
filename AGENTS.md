@@ -16,7 +16,7 @@ Arbeitsverzeichnis auf Servern: `/root/admin`
 Diese zentral verwalteten Dateien und Bereiche nur ändern, wenn die Aufgabe dies ausdrücklich erfordert:
 
 - `/root/admin/AGENTS.md`
-- `/root/admin/kilo.jsonc`
+- `/root/admin/.kilo/kilo.jsonc`
 - `/root/admin/.kilo/`
 - `/root/admin/scripts/`
 - `/root/admin/docs/`
