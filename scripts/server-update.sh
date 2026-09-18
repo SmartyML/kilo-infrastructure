@@ -1,35 +1,66 @@
 #!/bin/bash
-# Update des Servers mit kilo code Git Repository im Admin-Verzeichnis.
 set -euo pipefail
 
-ADMIN_DIR="/root/admin"
-BRANCH="main"
+REPO="/root/admin"
 
-echo "=== Server-Update: $(hostname) ==="
+cd "$REPO"
 
-if [ ! -d "$ADMIN_DIR/.git" ]; then
-    echo "FEHLER: $ADMIN_DIR ist kein Git-Repository."
+if [ ! -d ".git" ]; then
+    echo "FEHLER: $REPO ist kein Git-Repository."
     exit 1
 fi
 
-cd "$ADMIN_DIR"
+BRANCH="$(git branch --show-current)"
+REMOTE="origin"
 
-# Lokale Änderungen an Git-Dateien schützen.
-if [ -n "$(git status --porcelain --untracked-files=no)" ]; then
-    echo "FEHLER: Lokal geänderte Git-Dateien vorhanden."
-    git status --short
+if [ -z "$BRANCH" ]; then
+    echo "FEHLER: Detached HEAD. Kein aktiver Branch."
     exit 1
 fi
 
-echo "Hole aktuellen Git-Stand ..."
+REMOTE_URL="$(git remote get-url "$REMOTE")"
+OLD_COMMIT="$(git rev-parse --short HEAD)"
 
-git fetch origin "$BRANCH"
-git switch "$BRANCH"
-git pull --ff-only origin "$BRANCH"
+echo "========================================"
+echo " SERVER-UPDATE"
+echo "========================================"
+echo
+echo "Host:       $(hostname)"
+echo "Repository: $REMOTE_URL"
+echo "Branch:     $BRANCH"
+echo "Stand:      $OLD_COMMIT"
+echo
+
+echo "Lokale Abweichungen vor dem Update:"
+git status --short || true
 
 echo
-echo "Aktueller Stand:"
-git log -1 --oneline
+echo "Lade $REMOTE/$BRANCH neu ..."
+
+# Lokale Änderungen an getrackten Dateien verwerfen
+git reset --hard HEAD
+
+# Ungetrackte Dateien/Verzeichnisse entfernen.
+# Ignorierte Dateien wie .local bleiben erhalten.
+git clean -fd
+
+# Aktuellen Remote-Stand holen
+git fetch "$REMOTE" "$BRANCH"
+
+# Server exakt auf Remote-Stand setzen
+git reset --hard "$REMOTE/$BRANCH"
+
+NEW_COMMIT="$(git rev-parse --short HEAD)"
 
 echo
-echo "Server-Update abgeschlossen."
+echo "========================================"
+echo " UPDATE ABGESCHLOSSEN"
+echo "========================================"
+echo
+echo "Host:       $(hostname)"
+echo "Repository: $REMOTE_URL"
+echo "Branch:     $BRANCH"
+echo "Vorher:     $OLD_COMMIT"
+echo "Jetzt:      $NEW_COMMIT"
+echo
+git status --short --branch
